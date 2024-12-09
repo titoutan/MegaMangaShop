@@ -2,6 +2,7 @@
 package org.example.montaine.guillaume.tests
 
 import io.kotest.core.spec.style.BehaviorSpec
+import montaine.guillaume.Commande
 import montaine.guillaume.LigneCommande
 class MontaineGuillaumeTest: BehaviorSpec({
 
