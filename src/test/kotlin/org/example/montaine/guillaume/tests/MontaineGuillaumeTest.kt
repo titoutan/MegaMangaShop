@@ -1,6 +1,7 @@
 
 package org.example.montaine.guillaume.tests
 
+import de.huxhorn.sulky.ulid.ULID
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import montaine.guillaume.Boutique
@@ -38,7 +39,7 @@ class MontaineGuillaumeTest: BehaviorSpec({
                 val ticketDeCaisse = TicketDeCaisse()
                 ticketDeCaisse.calculer(commande)
                 Then("Le prix est juste") {
-                    ticketDeCaisse.arrondirLePrix(ticketDeCaisse.totalTtc) shouldBe 601.01
+                    ticketDeCaisse.arrondirLePrix(ticketDeCaisse.totalTtc) shouldBe 558.94
                 }
             }
             When("Test 4") {
@@ -77,4 +78,178 @@ class MontaineGuillaumeTest: BehaviorSpec({
             }
         }
     }
+        given("En France") {
+            `when`("Une boutique commande < 150e de livres") {
+                val boutique  = Boutique("France")
+                val commande  = Commande(ULID().nextULID(),boutique);
+
+                val lc1  = LigneCommande()
+                lc1.prix = 1.0
+                lc1.quantite = 1
+
+                commande.ajouterLigne(lc1)
+
+                val ticket = TicketDeCaisse(ULID().nextULID())
+                ticket.calculer(commande)
+                Then("Le prix est juste"){
+                    ticket.arrondirLePrix(ticket.totalTtc) shouldBe 1.2
+                }
+            }
+
+            `when`("Une boutique commande entre 150e et 200e de livres") {
+                val boutique  = Boutique("France")
+                val commande  = Commande(ULID().nextULID(),boutique);
+
+                val lc1  = LigneCommande()
+                lc1.prix = 1.0
+                lc1.quantite = 175
+                commande.ajouterLigne(lc1)
+
+                val ticket = TicketDeCaisse(ULID().nextULID())
+                ticket.calculer(commande)
+                Then("Le prix est juste"){
+                    ticket.arrondirLePrix(ticket.totalTtc)  shouldBe 205.8
+                }
+            }
+
+            `when`("Une boutique commande entre 200e et 300e de livres") {
+                val boutique  = Boutique("France")
+                val commande  = Commande(ULID().nextULID(),boutique);
+
+                val lc1  = LigneCommande()
+                lc1.prix = 1.0
+                lc1.quantite = 250
+                commande.ajouterLigne(lc1)
+
+                val ticket = TicketDeCaisse(ULID().nextULID())
+                ticket.calculer(commande)
+                Then("Le prix est juste"){
+                    ticket.arrondirLePrix(ticket.totalTtc)  shouldBe 291
+                }
+            }
+
+            `when`("Une boutique commande entre 300e et 500e de livres") {
+                val boutique  = Boutique("France")
+                val commande  = Commande(ULID().nextULID(),boutique);
+
+                val lc1  = LigneCommande()
+                lc1.prix = 1.0
+                lc1.quantite = 400
+                commande.ajouterLigne(lc1)
+
+                val ticket = TicketDeCaisse(ULID().nextULID())
+                ticket.calculer(commande)
+                Then("Le prix est juste"){
+                    ticket.arrondirLePrix(ticket.totalTtc)  shouldBe 456
+                }
+            }
+
+            `when`("Une boutique commande entre 500e et 1000e de livres") {
+                val boutique  = Boutique("France")
+                val commande  = Commande(ULID().nextULID(),boutique);
+
+                val lc1  = LigneCommande()
+                lc1.prix = 1.0
+                lc1.quantite = 600
+                commande.ajouterLigne(lc1)
+
+                val ticket = TicketDeCaisse(ULID().nextULID())
+                ticket.calculer(commande)
+                Then("Le prix est juste"){
+                    ticket.arrondirLePrix(ticket.totalTtc)  shouldBe 669.6
+                }
+            }
+
+            `when`("Une boutique commande plus de 1000e de livres") {
+                val boutique  = Boutique("France")
+                val commande  = Commande(ULID().nextULID(),boutique);
+
+                val lc1  = LigneCommande()
+                lc1.prix = 1.0
+                lc1.quantite = 1500
+                commande.ajouterLigne(lc1)
+
+                val ticket = TicketDeCaisse(ULID().nextULID())
+                ticket.calculer(commande)
+                Then("Le prix est juste"){
+                    ticket.arrondirLePrix(ticket.totalTtc)  shouldBe 1620
+                }
+            }
+        }
+
+        given("En Espagne") {
+
+            `when`("Une boutique commande plus de 1000e de livres") {
+                val boutique  = Boutique("Espagne")
+                val commande  = Commande(ULID().nextULID(),boutique);
+
+                val lc1  = LigneCommande()
+                lc1.prix = 1.0
+                lc1.quantite = 1500
+                commande.ajouterLigne(lc1)
+
+                val ticket = TicketDeCaisse(ULID().nextULID())
+                ticket.calculer(commande)
+                Then("Le prix est juste"){
+                    ticket.arrondirLePrix(ticket.totalTtc)  shouldBe 1595.7
+                }
+            }
+        }
+
+        given("En Allemagne") {
+
+            `when`("Une boutique commande plus de 1000e de livres") {
+                val boutique  = Boutique("Allemagne")
+                val commande  = Commande(ULID().nextULID(),boutique);
+
+                val lc1  = LigneCommande()
+                lc1.prix = 1.0
+                lc1.quantite = 1500
+                commande.ajouterLigne(lc1)
+
+                val ticket = TicketDeCaisse(ULID().nextULID())
+                ticket.calculer(commande)
+                Then("Le prix est juste"){
+                    ticket.arrondirLePrix(ticket.totalTtc)  shouldBe 1560.6
+                }
+            }
+        }
+
+        given("Au Royaume-Uni") {
+
+            `when`("Une boutique commande plus de 1000e de livres") {
+                val boutique  = Boutique("RU")
+                val commande  = Commande(ULID().nextULID(),boutique);
+
+                val lc1  = LigneCommande()
+                lc1.prix = 1.0
+                lc1.quantite = 1500
+                commande.ajouterLigne(lc1)
+
+                val ticket = TicketDeCaisse(ULID().nextULID())
+                ticket.calculer(commande)
+                Then("Le prix est juste"){
+                    ticket.arrondirLePrix(ticket.totalTtc)  shouldBe 1657.8
+                }
+            }
+        }
+
+        given("En Belgique") {
+
+            `when`("Une boutique commande plus de 1000e de livres") {
+                val boutique  = Boutique("Belgique")
+                val commande  = Commande(ULID().nextULID(),boutique);
+
+                val lc1  = LigneCommande()
+                lc1.prix = 1.0
+                lc1.quantite = 1500
+                commande.ajouterLigne(lc1)
+
+                val ticket = TicketDeCaisse(ULID().nextULID())
+                ticket.calculer(commande)
+                Then("Le prix est juste"){
+                    ticket.arrondirLePrix(ticket.totalTtc)  shouldBe 1579.5
+                }
+            }
+        }
     }})
