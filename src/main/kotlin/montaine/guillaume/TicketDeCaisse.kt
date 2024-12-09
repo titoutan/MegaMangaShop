@@ -13,33 +13,28 @@ data class TicketDeCaisse(val Id: String = ULID().nextULID() ) {
 
     fun calculer(commande : Commande) {
         var totalHT : Double = 0.0
-        var totalQt : Int = 0
 
         for(ligne in commande.lignes) {
             totalHT += ligne.quantite * ligne.prix
         }
 
-        for(ligne in commande.lignes) {
-            totalQt += ligne.quantite
-        }
-
-        if(totalQt in 150..200) {
+        if(totalHT in 150.0..200.0) {
             this.remise = 0.02
         }
 
-        if(totalQt in 200..300) {
+        if(totalHT in 200.0..300.0) {
             this.remise = 0.03
         }
 
-        if(totalQt in 300..500) {
+        if(totalHT in 300.0..500.0) {
             this.remise = 0.05
         }
 
-        if(totalQt in 500..1000) {
+        if(totalHT in 500.0..1000.0) {
             this.remise = 0.07
         }
 
-        if(totalQt>1000) {
+        if(totalHT>1000.0) {
             this.remise = 0.1
         }
 

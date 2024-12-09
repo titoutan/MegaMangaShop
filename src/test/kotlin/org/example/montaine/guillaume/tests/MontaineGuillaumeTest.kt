@@ -58,7 +58,7 @@ class MontaineGuillaumeTest: BehaviorSpec({
                 val ticketDeCaisse= TicketDeCaisse()
                 ticketDeCaisse.calculer(commande)
                 Then("Le prix est juste"){
-                    ticketDeCaisse.arrondirLePrix(ticketDeCaisse.totalTtc) shouldBe 873.89
+                    ticketDeCaisse.arrondirLePrix(ticketDeCaisse.totalTtc) shouldBe 812.72
                 }
             }
         }
