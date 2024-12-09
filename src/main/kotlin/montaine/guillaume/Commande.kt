@@ -12,7 +12,7 @@ data class Commande(val Id: String = ULID().nextULID(),val boutique:Boutique ) {
     fun setBoutique(laBoutique:Boutique){
         boutique=laBoutique
     }
-    fun getBoutique(){
+    fun getBoutique():Boutique{
         return boutique
     }
 }
