@@ -1,13 +1,12 @@
 package montaine.guillaume
 
-data class Boutique(val Pays: String) {
+import org.example.montaine.guillaume.montaine.guillaume.Pays
+import java.util.*
 
-    fun setPays(pays:String){
-        Pays=pays
-    }
-    fun getPays(){
-        return Pays
+data class Boutique(var pays: String) {
+
+    fun getPays(): Pays {
+        return Pays.valueOf(this.pays.uppercase(Locale.getDefault()))
     }
 
 }
-
